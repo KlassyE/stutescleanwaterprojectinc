@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - set -e
+    - export DEPLOYPATH="${HOME}/public_html/"
+    - /usr/bin/env npm ci --include=dev --no-audit --no-fund
+    - /usr/bin/env npm run build
+    - /bin/mkdir -p "${DEPLOYPATH}"
+    - /bin/cp -a dist/. "${DEPLOYPATH}"

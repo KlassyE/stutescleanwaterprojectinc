@@ -87,6 +87,27 @@ The current prepared outputs contain 305 full images and 305 thumbnails. The ful
 
 The layout has been checked from 320px mobile widths through 1440px desktop widths, including short landscape screens. Mobile navigation is scrollable on short viewports, the gallery lightbox is viewport-fixed, and all tested widths avoid horizontal page scrolling.
 
-## Deployment
+## Namecheap cPanel Git deployment
 
-Run `npm.cmd run build`, then deploy the contents of `dist/` to a static web host. The host must serve each directory’s `index.html` for trailing-slash URLs and use `404.html` for unknown paths. Keep canonical URLs, Open Graph URLs, the manifest start URL, sitemap, and structured data synchronized with the final production domain.
+This repository is configured for Namecheap hosting through cPanel Git Version Control. cPanel requires the deployment manifest to use the exact root-level filename `.cpanel.yml`; `cpanel.yaml` is not recognized.
+
+The checked-in deployment manifest:
+
+1. Stops immediately if a deployment command fails.
+2. Installs the locked dependencies, including the development packages required by TypeScript and Vite.
+3. Runs the production build.
+4. Copies the contents of `dist/` into `$HOME/public_html/` without exposing the repository, source files, or `node_modules` in the public document root.
+
+The copy step does not delete unrelated files already managed by cPanel, such as `.well-known` SSL-validation files.
+
+### One-time Namecheap setup
+
+1. Confirm that the cPanel deployment shell has `npm` on its `PATH` and uses Node.js 20.19 or newer, or Node.js 22.12 or newer. Vite requires one of those supported versions. The manifest resolves npm through `/usr/bin/env` so it can use the Node.js version selected for the Namecheap account.
+2. In **cPanel → Files → Git Version Control**, clone `https://github.com/KlassyE/stutescleanwaterprojectinc.git` into a non-public path such as `/home/CPANEL_USER/repositories/stutescleanwaterprojectinc`. Do not clone the source repository directly into `public_html`.
+3. Use the `main` branch.
+4. If the domain is an addon domain or its document root is not `$HOME/public_html/`, change only the `DEPLOYPATH` value in `.cpanel.yml` to the document root shown in cPanel Domains.
+5. In the repository’s **Manage → Pull or Deploy** screen, select **Update from Remote**, then **Deploy HEAD Commit**.
+
+For later releases, push the verified changes to GitHub, use **Update from Remote** in cPanel, and then run **Deploy HEAD Commit**. A GitHub push updates the remote repository but does not by itself run a pull deployment on Namecheap unless an additional automation hook has been configured.
+
+The deployed host must serve each directory’s `index.html` for trailing-slash URLs and use `404.html` for unknown paths. Keep canonical URLs, Open Graph URLs, the manifest start URL, sitemap, and structured data synchronized with the production domain.
