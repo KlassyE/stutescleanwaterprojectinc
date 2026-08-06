@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 88" role="img" aria-labelledby="title desc">
+  <title id="title">Stutes Clean Water Project droplet</title>
+  <desc id="desc">A blue water droplet with a low white cross opening through its base</desc>
+  <defs>
+    <linearGradient id="drop" x1="16" y1="10" x2="58" y2="76" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#27b7dc"/>
+      <stop offset="1" stop-color="#087da7"/>
+    </linearGradient>
+  </defs>
+  <path d="M36 3C29.2 15.4 10 34.7 10 54.5 10 72 21.4 84 36 84s26-12 26-29.5C62 34.7 42.8 15.4 36 3Z" fill="url(#drop)"/>
+  <path d="M36 29v57M19 54h34" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5.5"/>
+</svg>
