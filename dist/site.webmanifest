@@ -1,0 +1,16 @@
+{
+  "name": "Stutes Clean Water Project Inc.",
+  "short_name": "Stutes Water",
+  "description": "Improving access to clean and safe water in vulnerable rural communities of Uganda.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#eaf9fd",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
