@@ -46,14 +46,14 @@ The production output is generated in `dist/`, including a directory entry for e
 
 ## Content and image provenance
 
-- All project and leadership photographs in `src/assets/` were sourced directly from the organization’s Facebook-hosted posts or supplied for this project. No Google-sourced or stock images are used.
+- All project and leadership photographs in `src/assets/` were sourced directly from the organization’s Facebook-hosted posts or supplied by the organization for this project. No Google-sourced or stock images are used.
 - Public organization details were collected from the organization’s public Facebook presence and public nonprofit information available during development.
 - The site currently presents Kampala, Uganda as the field location and 4148 Highway 101 North, Gray Court, South Carolina 29645 as the US nonprofit address.
 - The site identifies the organization as a registered 501(c)(3), EIN 87-4575994.
-- The team page lists Tony Stutes and Sandy Stutes as founders, Katuura Johnson as Chief Executive Officer, and Kabunga Justus as Operations Manager. Verified portraits are used for Tony, Sandy, and Katuura; Kabunga retains a neutral placeholder until an official portrait is supplied.
-- The header and footer use a clean vector recreation of the verified blue droplet-and-cross mark together with the original “Stutes Clean / Water Project Inc. / Giving Hope” wording.
+- The team page lists Tony Stutes and Sandy Stutes as founders, Katuura Johnson as Chief Executive Officer, and Kabunga Justus as Operations Manager. It uses the supplied official portraits, including a chest-length crop of Kabunga Justus.
+- The header and footer use the organization’s supplied official logo with a transparent background. The mark keeps its official colours on light surfaces and switches to a clean white treatment on dark surfaces for visibility.
 - The separate `facebook-archive/` contains all 305 unique downloadable Facebook photo assets found across 312 photo links, plus JSON and CSV provenance manifests. Seven duplicate assets were excluded.
-- All 305 archive photographs are represented in the production gallery. Curated, clear photographs lead the gallery and appear across the page heroes and content sections; the rest follow in archive order.
+- Field photographs are organized in the production gallery as Schools & young people, Purifier deliveries, On the road & in the field, and Community moments. Photographs of children, school visits, and purifiers lead their respective collections; the supplied logo is not included as a gallery photograph.
 - Production photographs are WebP files. The gallery loads 640 × 480 thumbnails progressively and requests the larger, maximum-1600-pixel version only when an image is opened.
 
 Verify contact, registration, impact, and campaign details with the organization before changing or publishing new claims.
@@ -71,7 +71,7 @@ Verify contact, registration, impact, and campaign details with the organization
 - Brand and discovery files are in `public/`, including the favicon, web manifest, robots file, and sitemap.
 - Original Facebook downloads and provenance data remain in `facebook-archive/`. Production full images and thumbnails are generated in `public/images/facebook/`.
 
-Do not assign a field photograph to a named team member without confirmed identity.
+Use named field photography only when the organization has confirmed the person pictured.
 
 ## Facebook image preparation
 
@@ -83,6 +83,8 @@ npm.cmd run images:prepare
 
 The current prepared outputs contain 305 full images and 305 thumbnails. The full WebP set is 31.1% smaller than the archived JPEG originals; thumbnails are separate lightweight assets used by the gallery grid.
 
+The supplied official logo and the Kabunga Justus team portrait are prepared by `scripts/prepare-brand-assets.mjs`.
+
 ## Responsive behavior
 
 The layout has been checked from 320px mobile widths through 1440px desktop widths, including short landscape screens. Mobile navigation is scrollable on short viewports, the gallery lightbox is viewport-fixed, and all tested widths avoid horizontal page scrolling.
@@ -91,23 +93,17 @@ The layout has been checked from 320px mobile widths through 1440px desktop widt
 
 This repository is configured for Namecheap hosting through cPanel Git Version Control. cPanel requires the deployment manifest to use the exact root-level filename `.cpanel.yml`; `cpanel.yaml` is not recognized.
 
-The checked-in deployment manifest:
-
-1. Stops immediately if a deployment command fails.
-2. Installs the locked dependencies, including the development packages required by TypeScript and Vite.
-3. Runs the production build.
-4. Copies the contents of `dist/` into `$HOME/public_html/` without exposing the repository, source files, or `node_modules` in the public document root.
+The shared-hosting deployment shell does not provide `npm`, so the site is built locally and the `dist/` output is committed to the repository. The checked-in deployment manifest only copies the committed `dist/` contents into the addon domain document root `/home/tecnyqbq/stutescleanwaterprojectinc.com/`, without exposing the repository, source files, or `node_modules` in the public document root.
 
 The copy step does not delete unrelated files already managed by cPanel, such as `.well-known` SSL-validation files.
 
 ### One-time Namecheap setup
 
-1. Confirm that the cPanel deployment shell has `npm` on its `PATH` and uses Node.js 20.19 or newer, or Node.js 22.12 or newer. Vite requires one of those supported versions. The manifest resolves npm through `/usr/bin/env` so it can use the Node.js version selected for the Namecheap account.
-2. In **cPanel → Files → Git Version Control**, clone `https://github.com/KlassyE/stutescleanwaterprojectinc.git` into a non-public path such as `/home/CPANEL_USER/repositories/stutescleanwaterprojectinc`. Do not clone the source repository directly into `public_html`.
-3. Use the `main` branch.
-4. If the domain is an addon domain or its document root is not `$HOME/public_html/`, change only the `DEPLOYPATH` value in `.cpanel.yml` to the document root shown in cPanel Domains.
-5. In the repository’s **Manage → Pull or Deploy** screen, select **Update from Remote**, then **Deploy HEAD Commit**.
+1. In **cPanel → Files → Git Version Control**, clone `https://github.com/KlassyE/stutescleanwaterprojectinc.git` into a non-public path such as `/home/CPANEL_USER/repositories/stutescleanwaterprojectinc`. Do not clone the repository into the domain document root; cPanel refuses to deploy a repository whose folder is the document root and reports that a valid `.cpanel.yml` is required.
+2. Use the `main` branch.
+3. If the document root changes, update only the `DEPLOYPATH` value in `.cpanel.yml` to the document root shown in cPanel Domains.
+4. In the repository’s **Manage → Pull or Deploy** screen, select **Update from Remote**, then **Deploy HEAD Commit**.
 
-For later releases, push the verified changes to GitHub, use **Update from Remote** in cPanel, and then run **Deploy HEAD Commit**. A GitHub push updates the remote repository but does not by itself run a pull deployment on Namecheap unless an additional automation hook has been configured.
+For later releases, run `npm.cmd run build`, commit the changes including `dist/`, push to GitHub, use **Update from Remote** in cPanel, and then run **Deploy HEAD Commit**. A GitHub push updates the remote repository but does not by itself run a pull deployment on Namecheap unless an additional automation hook has been configured.
 
 The deployed host must serve each directory’s `index.html` for trailing-slash URLs and use `404.html` for unknown paths. Keep canonical URLs, Open Graph URLs, the manifest start URL, sitemap, and structured data synchronized with the production domain.

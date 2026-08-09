@@ -21,9 +21,9 @@ const storyCards = [
   {
     label: 'Preparing the work',
     title: 'Every delivery starts with preparation.',
-    text: 'Two systems ready beside a field representative show the practical preparation behind a community visit.',
+    text: 'Two systems ready beside Kabunga Justus show the practical preparation behind a community visit.',
     image: images.teamField,
-    alt: 'A field representative standing between two stainless steel water purification systems',
+    alt: 'Kabunga Justus standing beside water purification systems in the field',
   },
 ]
 
@@ -37,8 +37,8 @@ export function StoriesPage() {
         accent=" every delivery."
         intro="The organization’s Facebook updates keep schools, demonstrations, equipment, and community moments visible as the work moves forward."
         image={images.storiesHero}
-        imageAlt="Health-center staff and project representatives gathered around two water purification systems"
-        imageLabel="A health-center delivery"
+        imageAlt="Katuura Johnson demonstrating safe-water practices with students"
+        imageLabel="Katuura Johnson in the field"
         tone="deep"
         layout="cinematic"
       >

@@ -2,7 +2,7 @@ import { ArrowRight, Facebook } from 'lucide-react'
 import { GalleryLightbox } from '../components/GalleryLightbox'
 import { PageHero } from '../components/PageHero'
 import { SupportBanner } from '../components/SupportBanner'
-import { FACEBOOK_URL, galleryItems, images } from '../site-data'
+import { FACEBOOK_URL, galleryGroups, galleryItems, images } from '../site-data'
 
 export function GalleryPage() {
   return (
@@ -28,18 +28,30 @@ export function GalleryPage() {
           <div className="gallery-page-heading" data-reveal>
             <div>
               <p className="kicker">
-                {galleryItems.length} photographs · One public record
+                {galleryItems.length} photographs · Four field collections
               </p>
               <h2>Scenes from the field.</h2>
             </div>
             <p>
-              The clearest moments appear first, followed by the complete Facebook
-              archive. Select any image to open its larger WebP version.
+              Browse school visits, purifier deliveries, field journeys, and community
+              moments. Select any image to open its larger version.
             </p>
           </div>
-          <div data-reveal>
-            <GalleryLightbox items={galleryItems} className="gallery-page-grid" />
-          </div>
+          {galleryGroups.map((group) => (
+            <section
+              className="gallery-collection"
+              key={group.id}
+              aria-labelledby={`${group.id}-gallery-heading`}
+              data-reveal
+            >
+              <div className="gallery-collection-heading">
+                <p className="kicker">{group.items.length} photographs</p>
+                <h3 id={`${group.id}-gallery-heading`}>{group.title}</h3>
+                <p>{group.intro}</p>
+              </div>
+              <GalleryLightbox items={group.items} className="gallery-page-grid" />
+            </section>
+          ))}
         </div>
       </section>
 

@@ -69,13 +69,9 @@ export function HomePage() {
             <div className="hero-photo-frame">
               <img
                 src={images.homeHero}
-                alt="A large Ugandan school community gathered outdoors with a blue water purifier"
+                alt="Katuura Johnson demonstrating a water purifier to students in Uganda"
                 fetchPriority="high"
               />
-              <div className="hero-photo-label">
-                <span>From the field</span>
-                <strong>Uganda</strong>
-              </div>
             </div>
             <div className="hero-note">
               <span className="note-number">01</span>
@@ -156,7 +152,7 @@ export function HomePage() {
               </div>
               <img
                 src={images.waterEducation}
-                alt="A project representative preparing a blue water purifier as students watch"
+                alt="A water purifier being prepared as students watch"
                 loading="lazy"
               />
             </article>
@@ -194,7 +190,7 @@ export function HomePage() {
               </div>
               <img
                 src={images.washEducation}
-                alt="A project representative demonstrating a water system to primary school students"
+                alt="A safe-water demonstration with primary school students"
                 loading="lazy"
               />
             </article>

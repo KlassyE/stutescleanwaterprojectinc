@@ -121,7 +121,7 @@ export function AboutPage() {
           <div className="team-teaser-image" data-reveal>
             <img
               src={images.teamField}
-              alt="A field representative standing between two water purification systems"
+              alt="Kabunga Justus with students and water purification systems in the field"
               loading="lazy"
             />
           </div>

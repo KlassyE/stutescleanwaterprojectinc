@@ -43,8 +43,8 @@ export function WorkPage() {
         accent=" communities can own."
         intro="Stutes Clean Water Project brings practical purification equipment, school-first delivery, and safe-water learning together in one local approach."
         image={images.workHero}
-        imageAlt="A project representative teaching students beside a blue water purification system"
-        imageLabel="School demonstration"
+        imageAlt="Katuura Johnson leading a safe-water demonstration with students"
+        imageLabel="Katuura Johnson in the field"
       >
         <a className="button button-primary" href="#programs">
           See the approach <ArrowRight aria-hidden="true" />

@@ -1,4 +1,4 @@
-import { ArrowRight, Network, UserRound, UsersRound } from 'lucide-react'
+import { ArrowRight, Network, UsersRound } from 'lucide-react'
 import { PageHero } from '../components/PageHero'
 import { SupportBanner } from '../components/SupportBanner'
 import { images, teamMembers } from '../site-data'
@@ -13,8 +13,8 @@ export function TeamPage() {
         accent=" the mission moving."
         intro="Founding vision, executive direction, and field operations come together around one goal: safer water access for Ugandan communities."
         image={images.teamField}
-        imageAlt="A field representative standing between two water purification systems ready for delivery"
-        imageLabel="Systems ready for delivery"
+        imageAlt="Kabunga Justus with students and water purification systems in the field"
+        imageLabel="Kabunga Justus in the field"
       >
         <a className="button button-primary" href="#team-roster">
           Meet the team <ArrowRight aria-hidden="true" />
@@ -29,12 +29,8 @@ export function TeamPage() {
           </div>
           <div data-reveal>
             <p className="lead-copy">
-              Verified portraits now introduce founders Tony and Sandy Stutes and
-              Chief Executive Officer Katuura Johnson.
-            </p>
-            <p>
-              Kabunga Justus retains a clearly marked placeholder until an official
-              portrait is supplied or confirmed.
+              Founding vision, executive direction, and field operations work together
+              to keep clean-water access moving forward.
             </p>
           </div>
         </div>
@@ -44,23 +40,12 @@ export function TeamPage() {
         <div className="section-inner team-grid">
           {teamMembers.map((member, index) => (
             <article className="team-card" key={member.name} data-reveal>
-              {member.image ? (
-                <figure className="team-photo">
-                  <img src={member.image} alt={member.imageAlt} loading="lazy" />
-                  <span className="team-placeholder-number" aria-hidden="true">
-                    0{index + 1}
-                  </span>
-                </figure>
-              ) : (
-                <div
-                  className="team-photo-placeholder"
-                  aria-label={`Portrait placeholder for ${member.name}`}
-                >
-                  <span className="team-placeholder-number">0{index + 1}</span>
-                  <UserRound aria-hidden="true" />
-                  <span>Portrait coming soon</span>
-                </div>
-              )}
+              <figure className="team-photo">
+                <img src={member.image} alt={member.imageAlt} loading="lazy" />
+                <span className="team-placeholder-number" aria-hidden="true">
+                  0{index + 1}
+                </span>
+              </figure>
               <div className="team-card-copy">
                 <p>{member.role}</p>
                 <h2>{member.name}</h2>

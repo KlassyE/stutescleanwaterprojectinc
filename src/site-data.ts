@@ -1,4 +1,5 @@
 import katuuraJohnson from './assets/katuura-johnson.jpg'
+import kabungaJustus from './assets/kabunga-justus.webp'
 import sandyStutes from './assets/sandy-stutes.jpg'
 import tonyStutes from './assets/tony-stutes.jpg'
 import { facebookArchiveIds } from './facebook-archive'
@@ -6,8 +7,8 @@ import { facebookArchiveIds } from './facebook-archive'
 export const FACEBOOK_URL =
   'https://www.facebook.com/profile.php?id=100064619866357'
 export const EMAIL = 'stutescleanwateruganda@gmail.com'
-export const PHONE_DISPLAY = '+256 754 723345'
-export const PHONE_LINK = '+256754723345'
+export const PHONE_DISPLAY = '0706930008'
+export const PHONE_LINK = '+256706930008'
 export const US_ADDRESS = '4148 Highway 101 North, Gray Court, SC 29645'
 
 export const navItems = [
@@ -20,6 +21,21 @@ export const navItems = [
 
 type FacebookImageVariant = 'full' | 'thumbs'
 
+function fieldImage(fileName: string) {
+  return `/images/facebook/full/${encodeURIComponent(fileName)}`
+}
+
+const renamedFacebookFullImages: Record<number, string> = {
+  40: 'stu and john.webp',
+  44: 'stu john.webp',
+  118: 'justus in field.webp',
+  130: 'logo.webp',
+  218: 'justus crop.webp',
+  225: 'johnson in field 2.webp',
+  245: 'johnson in field.webp',
+  283: 'johnson in field 3.webp',
+}
+
 export function facebookImage(
   archiveIndex: number,
   variant: FacebookImageVariant = 'full',
@@ -31,12 +47,18 @@ export function facebookImage(
   }
 
   const sequence = String(archiveIndex).padStart(3, '0')
+  const renamedFullImage = renamedFacebookFullImages[archiveIndex]
+
+  if (variant === 'full' && renamedFullImage) {
+    return fieldImage(renamedFullImage)
+  }
+
   return `/images/facebook/${variant}/stutes-facebook-${sequence}-${facebookId}.webp`
 }
 
 export const images = {
-  homeHero: facebookImage(2),
-  workHero: facebookImage(9),
+  homeHero: fieldImage('johnson in field.webp'),
+  workHero: fieldImage('johnson in field 2.webp'),
   waterEducation: facebookImage(10),
   schoolsFirst: facebookImage(269),
   washEducation: facebookImage(3),
@@ -44,10 +66,10 @@ export const images = {
   schoolDelivery: facebookImage(2),
   communityThanks: facebookImage(109),
   firstCup: facebookImage(201),
-  storiesHero: facebookImage(174),
+  storiesHero: fieldImage('johnson in field 3.webp'),
   galleryHero: facebookImage(65),
   aboutHero: facebookImage(35),
-  teamField: facebookImage(129),
+  teamField: fieldImage('justus in field.webp'),
   contactHero: facebookImage(224),
   contactLocation: facebookImage(176),
 }
@@ -60,9 +82,12 @@ export interface GalleryItem {
   archiveIndex: number
 }
 
-const featuredArchiveOrder = [
-  2, 9, 35, 65, 109, 174, 201, 224, 269, 129, 10, 3, 55, 124, 305,
-]
+export interface GalleryGroup {
+  id: string
+  title: string
+  intro: string
+  items: GalleryItem[]
+}
 
 const featuredGalleryCopy: Record<number, Pick<GalleryItem, 'alt' | 'caption'>> = {
   2: {
@@ -127,31 +152,112 @@ const featuredGalleryCopy: Record<number, Pick<GalleryItem, 'alt' | 'caption'>> 
   },
 }
 
-const featuredArchiveSet = new Set(featuredArchiveOrder)
-const galleryArchiveOrder = [
-  ...featuredArchiveOrder,
-  ...facebookArchiveIds
-    .map((_, index) => index + 1)
-    .filter((archiveIndex) => !featuredArchiveSet.has(archiveIndex)),
+function archiveRange(first: number, last: number) {
+  return Array.from({ length: last - first + 1 }, (_, index) => first + index)
+}
+
+function createGalleryItem(archiveIndex: number): GalleryItem {
+  const featuredCopy = featuredGalleryCopy[archiveIndex]
+
+  return {
+    src: facebookImage(archiveIndex),
+    thumbnailSrc: facebookImage(archiveIndex, 'thumbs'),
+    alt:
+      featuredCopy?.alt ??
+      'A Stutes Clean Water Project photograph from a school, community, or field visit in Uganda',
+    caption: featuredCopy?.caption ?? 'Stutes Clean Water Project field visit',
+    archiveIndex,
+  }
+}
+
+function createGalleryGroup(
+  id: string,
+  title: string,
+  intro: string,
+  archiveIndexes: number[],
+  featuredIndexes: number[],
+): GalleryGroup {
+  const availableIndexes = new Set(archiveIndexes)
+  const featured = featuredIndexes.filter((index) => availableIndexes.has(index))
+  const featuredSet = new Set(featured)
+
+  return {
+    id,
+    title,
+    intro,
+    items: [...featured, ...archiveIndexes.filter((index) => !featuredSet.has(index))]
+      .map(createGalleryItem),
+  }
+}
+
+const schoolVisitIndexes = [
+  ...archiveRange(1, 36),
+  46,
+  ...archiveRange(51, 65),
+  ...archiveRange(72, 75),
+  ...archiveRange(81, 87),
+  ...archiveRange(89, 100),
+  ...archiveRange(131, 133),
+  ...archiveRange(226, 285),
+  ...archiveRange(303, 305),
 ]
 
-export const galleryItems: GalleryItem[] = galleryArchiveOrder.map(
-  (archiveIndex) => {
-    const featuredCopy = featuredGalleryCopy[archiveIndex]
-    const sequence = String(archiveIndex).padStart(3, '0')
+const purifierDeliveryIndexes = [
+  ...archiveRange(66, 71),
+  ...archiveRange(109, 129),
+  ...archiveRange(192, 205),
+  ...archiveRange(208, 214),
+  ...archiveRange(217, 225),
+  ...archiveRange(295, 302),
+]
 
-    return {
-      src: facebookImage(archiveIndex),
-      thumbnailSrc: facebookImage(archiveIndex, 'thumbs'),
-      alt:
-        featuredCopy?.alt ??
-        `Stutes Clean Water Project field photograph ${sequence} from the organization’s Facebook archive`,
-      caption:
-        featuredCopy?.caption ?? `Field archive · Photograph ${sequence}`,
-      archiveIndex,
-    }
-  },
-)
+const fieldJourneyIndexes = [
+  ...archiveRange(37, 45),
+  47,
+  ...archiveRange(76, 80),
+  88,
+  ...archiveRange(101, 108),
+  ...archiveRange(171, 191),
+  ...archiveRange(206, 207),
+  ...archiveRange(215, 216),
+  ...archiveRange(286, 294),
+]
+
+const communityMomentIndexes = [...archiveRange(48, 50), ...archiveRange(134, 170)]
+
+export const galleryGroups = [
+  createGalleryGroup(
+    'schools',
+    'Schools & young people',
+    'School visits, safe-water learning, and the young people at the heart of each delivery.',
+    schoolVisitIndexes,
+    [305, 269, 65, 2, 9, 10, 35, 52, 54, 72, 91, 124],
+  ),
+  createGalleryGroup(
+    'purifiers',
+    'Purifier deliveries',
+    'Purifiers arriving, being demonstrated, and becoming part of daily life.',
+    purifierDeliveryIndexes,
+    [224, 201, 109, 129, 174, 196, 192, 203, 204, 205],
+  ),
+  createGalleryGroup(
+    'field',
+    'On the road & in the field',
+    'The travel, preparation, water sources, and infrastructure behind the work.',
+    fieldJourneyIndexes,
+    [171, 183, 101, 102, 104, 105, 106, 107, 108],
+  ),
+  createGalleryGroup(
+    'community',
+    'Community moments',
+    'Neighbours, partners, and the everyday moments that surround the mission.',
+    communityMomentIndexes,
+    [141, 142, 151, 153, 158, 163, 165],
+  ),
+]
+
+// Archive image 130 is the supplied project logo rather than a field photograph.
+export const galleryItems = galleryGroups.flatMap((group) => group.items)
 
 export const teamMembers = [
   {
@@ -183,7 +289,7 @@ export const teamMembers = [
     role: 'Operations Manager',
     description:
       'Coordinates operational planning that helps field activities reach schools and communities.',
-    image: undefined,
-    imageAlt: undefined,
+    image: kabungaJustus,
+    imageAlt: 'Chest-length portrait of Kabunga Justus in a Stutes Clean Water Project shirt',
   },
 ] as const
