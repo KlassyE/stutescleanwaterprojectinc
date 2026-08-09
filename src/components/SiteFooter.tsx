@@ -4,6 +4,8 @@ import {
   FACEBOOK_URL,
   PHONE_DISPLAY,
   PHONE_LINK,
+  US_PHONE_DISPLAY,
+  US_PHONE_LINK,
 } from '../site-data'
 import { BrandMark } from './BrandMark'
 
@@ -48,6 +50,10 @@ export function SiteFooter() {
           <a href={`tel:${PHONE_LINK}`}>
             <Phone aria-hidden="true" />
             <span>{PHONE_DISPLAY}</span>
+          </a>
+          <a href={`tel:${US_PHONE_LINK}`}>
+            <Phone aria-hidden="true" />
+            <span>{US_PHONE_DISPLAY}</span>
           </a>
           <span>
             <MapPin aria-hidden="true" />

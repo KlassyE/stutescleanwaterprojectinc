@@ -9,6 +9,8 @@ export const FACEBOOK_URL =
 export const EMAIL = 'stutescleanwateruganda@gmail.com'
 export const PHONE_DISPLAY = '0706930008'
 export const PHONE_LINK = '+256706930008'
+export const US_PHONE_DISPLAY = '+1 864 876 2200'
+export const US_PHONE_LINK = '+18648762200'
 export const US_ADDRESS = '4148 Highway 101 North, Gray Court, SC 29645'
 
 export const navItems = [

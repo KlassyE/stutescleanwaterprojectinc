@@ -3807,7 +3807,7 @@ figure {
 
 .contact-card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
@@ -4228,10 +4228,6 @@ figure {
 
   .contact-card-grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .contact-card:last-child {
-    grid-column: 1 / 3;
   }
 
   .footer-main-multipage {

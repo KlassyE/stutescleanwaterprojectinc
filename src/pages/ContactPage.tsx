@@ -15,6 +15,8 @@ import {
   FACEBOOK_URL,
   PHONE_DISPLAY,
   PHONE_LINK,
+  US_PHONE_DISPLAY,
+  US_PHONE_LINK,
   US_ADDRESS,
   images,
 } from '../site-data'
@@ -58,6 +60,12 @@ export function ContactPage() {
               <Phone aria-hidden="true" />
               <span>Uganda phone</span>
               <strong>{PHONE_DISPLAY}</strong>
+              <ArrowUpRight aria-hidden="true" />
+            </a>
+            <a className="contact-card" href={`tel:${US_PHONE_LINK}`} data-reveal>
+              <Phone aria-hidden="true" />
+              <span>US phone</span>
+              <strong>{US_PHONE_DISPLAY}</strong>
               <ArrowUpRight aria-hidden="true" />
             </a>
             <a
