@@ -25,12 +25,12 @@ export function TeamPage() {
         <div className="section-inner team-intro-grid">
           <div data-reveal>
             <p className="kicker">The leadership roster</p>
-            <h2>Four roles. One clean-water mission.</h2>
+            <h2>Three roles. One clean-water mission.</h2>
           </div>
           <div data-reveal>
             <p className="lead-copy">
-              Founding vision, executive direction, and field operations work together
-              to keep clean-water access moving forward.
+              Founding vision and executive direction work together to keep
+              clean-water access moving forward.
             </p>
           </div>
         </div>
@@ -74,10 +74,9 @@ export function TeamPage() {
           <article data-reveal>
             <Network aria-hidden="true" />
             <span>Uganda leadership</span>
-            <h3>Katuura Johnson & Kabunga Justus</h3>
+            <h3>Kabunga Justus</h3>
             <p>
-              Executive direction and operations connect the mission to practical
-              field activity in Uganda.
+              Executive direction connects the mission to practical field activity in Uganda.
             </p>
           </article>
         </div>

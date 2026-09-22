@@ -1,5 +1,3 @@
-import katuuraJohnson from './assets/katuura-johnson.jpg'
-import kabungaJustus from './assets/kabunga-justus.webp'
 import sandyStutes from './assets/sandy-stutes.jpg'
 import tonyStutes from './assets/tony-stutes.jpg'
 import { facebookArchiveIds } from './facebook-archive'
@@ -279,19 +277,11 @@ export const teamMembers = [
     imageAlt: 'Portrait of Sandy Stutes',
   },
   {
-    name: 'Katuura Johnson',
+    name: 'Kabunga Justus',
     role: 'Chief Executive Officer',
     description:
       'Leads the organization’s executive direction and the day-to-day delivery of its mission.',
-    image: katuuraJohnson,
-    imageAlt: 'Portrait of Katuura Johnson wearing glasses',
-  },
-  {
-    name: 'Kabunga Justus',
-    role: 'Operations Manager',
-    description:
-      'Coordinates operational planning that helps field activities reach schools and communities.',
-    image: kabungaJustus,
+    image: fieldImage('justus.webp'),
     imageAlt: 'Chest-length portrait of Kabunga Justus in a Stutes Clean Water Project shirt',
   },
 ] as const
